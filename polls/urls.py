@@ -8,9 +8,9 @@ urlpatterns = [
     path('add/', PollsAdd, name='add'),
     path('edit/<int:poll_id>/', PollsEdit, name='edit'),
     path('delete/<int:poll_id>/', PollsDelete, name='delete'),
-    path('edit/<int:poll_id>/choice/add/', ChoiceAdd, name='add_choice'),
-    path('edit/choice/<int:choice_id>/', ChoiceEdit, name='edit_choice'),
-    path('delete/choice/<int:choice_id>/', ChoiceDelete, name='delete_choice'),
+    path('edit/<int:poll_id>/choice/add/', ChoiceAdd, name='add-choice'),
+    path('edit/choice/<int:choice_id>/', ChoiceEdit, name='edit-choice'),
+    path('delete/choice/<int:choice_id>/', ChoiceDelete, name='delete-choice'),
     path('<int:poll_id>/end/', EndPoll, name='end')
 ]
 

@@ -26,14 +26,14 @@
             {% endfor %}
         <button type="submit" class="btn btn-primary">Update</button>
         <a class="btn btn-danger" href="{% url 'polls:delete' poll.pk %}" role="button" onclick="return confirm('Are you sure?')">Delete</a>
-                <a class="btn btn-warning" href="{% url 'polls:add_choice' poll.pk %}" role="button">Add Choice</a>
+                <a class="btn btn-warning" href="{% url 'polls:add-choice' poll.pk %}" role="button">Add Choice</a>
         </form>
         <div class="choices">
                 <h2 class="text-center mt-3">Choices</h2>
                 <hr>
                 <ul class="list-group">
                     {% for choice in poll.choice_set.all %}
-                    <li class="list-group-item"><a href="{% url 'polls:edit_choice' choice.id %}"><i class="fas fa-pencil-alt">edit choice</i></a>&nbsp
+                    <li class="list-group-item"><a href="{% url 'polls:edit-choice' choice.id %}"><i class="fas fa-pencil-alt">edit choice</i></a>&nbsp
                         {{ choice.choice_text }}</li>
                     {% endfor %}
                 </ul>

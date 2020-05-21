@@ -1,18 +1,23 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Poll, Choice, Vote
 from django.views.generic import ListView
 from django.contrib import messages
-from .forms import PollAddForm, PollEditForm, ChoiceAddForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Poll, Choice, Vote
+from .forms import PollAddForm, PollEditForm, ChoiceAddForm
 # Create your views here.
+
+
 def check_admin(user):
     return user.is_superuser
+
 
 class PollsList(LoginRequiredMixin, ListView):
     model = Poll
     template_name = 'polls/polls_list.html'
     context_object_name = 'polls'
+
+
 @login_required
 def PollsDetail(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
@@ -25,6 +30,8 @@ def PollsDetail(request, poll_id):
         'poll': poll
     }
     return render(request, 'polls/polls_detail.html', context)
+
+
 @login_required
 def PollsVote(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
@@ -44,6 +51,8 @@ def PollsVote(request, poll_id):
         'poll': poll
     }
     return render(request, 'polls/polls_result.html', context)
+
+
 @user_passes_test(check_admin)
 def PollsAdd(request):
     if request.method == 'POST':
@@ -63,6 +72,8 @@ def PollsAdd(request):
         'form': form
     }
     return render(request, 'polls/polls_add.html', context)
+
+
 @user_passes_test(check_admin)
 def PollsEdit(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
@@ -79,12 +90,16 @@ def PollsEdit(request, poll_id):
         'poll': poll
     }
     return render(request, 'polls/polls_edit.html', context)
+
+
 @user_passes_test(check_admin)
 def PollsDelete(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
     poll.delete()
     messages.success(request, 'Poll deleted successfully', extra_tags='alert alert-warning alert-dismissible fade show')
     return redirect('polls:list')
+
+
 @user_passes_test(check_admin)
 def ChoiceAdd(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
@@ -101,6 +116,8 @@ def ChoiceAdd(request, poll_id):
         'form': form
     }
     return render(request, 'polls/choice_add.html', context)
+
+
 @user_passes_test(check_admin)
 def ChoiceEdit(request, choice_id):
     choice = get_object_or_404(Choice, pk=choice_id)
@@ -120,6 +137,8 @@ def ChoiceEdit(request, choice_id):
         'choice': choice
     }
     return render(request, 'polls/choice_add.html', context)
+
+
 @user_passes_test(check_admin)
 def ChoiceDelete(request, choice_id):
     choice = get_object_or_404(Choice, pk=choice_id)
@@ -127,6 +146,8 @@ def ChoiceDelete(request, choice_id):
     choice.delete()
     messages.success(request, 'Choice deleted successfully', extra_tags='alert alert-warning alert-dismissible fade show')
     return redirect('polls:edit', poll.pk)
+
+
 @user_passes_test(check_admin)
 def EndPoll(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)

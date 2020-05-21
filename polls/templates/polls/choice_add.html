@@ -26,7 +26,7 @@
             {% endfor %}
         {% if edit_choice %}
         <button type="submit" class="btn btn-primary">Update</button>
-        <a class="btn btn-danger" href="{% url 'polls:delete_choice' choice.id %}" role="button" onclick="return confirm('Are you sure you want to delete this?')">Delete</a>
+        <a class="btn btn-danger" href="{% url 'polls:delete-choice' choice.id %}" role="button" onclick="return confirm('Are you sure you want to delete this?')">Delete</a>
         {% else %}
         <button type="submit" class="btn btn-primary">Add</button>
                 {% endif %}
